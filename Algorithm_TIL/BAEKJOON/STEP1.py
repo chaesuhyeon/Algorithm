@@ -41,3 +41,58 @@ print(int(A)-int(B))
 
 A,B = map(int, input().split()) #첫번째인자:함수, 두번째인자:데이터
 print(A-B)
+
+# 문제 번호 	10998
+# 두 정수 A와 B를 입력받은 다음, A×B를 출력하는 프로그램을 작성하시오.
+A,B = input().split()
+print(int(A)*int(B))
+
+A,B = map(int, input().split()) #첫번째인자:함수, 두번째인자:데이터
+print(A*B)
+
+# 문제 번호 	1008
+# 두 정수 A와 B를 입력받은 다음, A/B를 출력하는 프로그램을 작성하시오.
+A,B = input().split()
+print(int(A)/int(B))
+
+A,B = map(int, input().split()) #첫번째인자:함수, 두번째인자:데이터
+print(A/B)
+
+# 문제 번호 	10869
+# 두 자연수 A와 B가 주어진다. 이때, A+B, A-B, A*B, A/B(몫), A%B(나머지)를 출력하는 프로그램을 작성하시오. 
+A,B = map(int, input().split())
+print(A+B, A-B, A*B, A//B, A%B, sep='\n')
+
+# 문제 번호 10430
+# 세 수 A, B, C가 주어졌을 때, 위의 네 가지 값을 구하는 프로그램을 작성하시오.
+A,B,C = map(int, input().split())
+print((A+B)%C, ((A%C)+(B%C))%C, (A*B)%C, ((A%C)*(B%C))%C, sep='\n')
+
+# 문제 번호 2588
+A = int(input())
+D,E,F = map(str, input().split())
+DEF = D + E + F
+print(A*int(F),A*int(E),A*int(D), A*int(DEF) , sep='\n')
+# 이방법으로 풀어서 답은 나오는데 런타임오류 난다...
+# # #
+A = int(input())
+B = int(input()) 
+out1 = A*((B%100)%10)
+out2 = A*((B%100)//10)
+out3 = A*(B//100)
+result = A*B
+print(out1, out2, out3, result, sep='\n')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
