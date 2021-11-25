@@ -33,3 +33,46 @@ else:
     print("0")
     
 
+# 문제 번호 	14681 사분면 고르기
+#  주어진 점이 어느 사분면에 속하는지 알아내는 프로그램을 작성하시오.
+x = int(input())
+y = int(input())
+if (x>0 and y >0):
+    print("1")
+elif (x>0 and y<0):
+    print("4")
+elif (x<0 and y>0):
+    print("2")
+else :
+    print("3")
+
+# 문제 번호 2884 알람시계
+# 45분 일찍 알람 설정하기
+H,M = map(int, input().split())
+if (M-45 < 0):
+    M = (60+(M-45))
+    if (H == 0):
+        H = 24
+    H = H-1
+else:
+    M = (M-45)
+print(H, M)
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
