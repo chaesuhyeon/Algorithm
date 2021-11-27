@@ -84,14 +84,31 @@ for _ in range(T):
 
 
 
+# 문제 번호 2438 별 찍기 -1
+# 첫째 줄에는 별 1개, 둘째 줄에는 별 2개, N번째 줄에는 별 N개를 찍는 문제
+# *
+# **
+# ***
+# ****
+# *****
+N = int(input())
+for i in range(1, N+1):
+    print("*" * i)
 
 
+# 문제 번호 2439 별 찍기 -2
+# 첫째 줄에는 별 1개, 둘째 줄에는 별 2개, N번째 줄에는 별 N개를 찍는 문제 . 하지만, 오른쪽을 기준으로 정렬한 별(예제 참고)을 출력하시오.   
+N = int(input())
+for i in range(1, N+1):
+    print(" " * (N-i) + "*" * i)
 
 
-
-
-
-
-
+# 문제 번호 10871 x보다 작은 수 
+# 정수 N개로 이루어진 수열 A와 정수 X가 주어진다. 이때, A에서 X보다 작은 수를 모두 출력하는 프로그램을 작성하시오.
+N,X = map(int, input().split())
+num = list(map(int, input().split()))
+for i in range(N):
+    if num[i] < X:
+        print(num[i], end=" ")  # end = " " 로 한칸씩 띄어서 출력
 
     
