@@ -7,7 +7,6 @@
 # ord(문자) : 아스키 코드를 반환
 # chr(숫자) : 숫자에 맞는 아스키 코드를 반환
 
-
 word = input()
 
 print(ord(word))
@@ -15,8 +14,14 @@ print(ord(word))
 
 
 # 문제 번호 11720 숫자의 합 
-#
-
+# N개의 숫자가 공백 없이 쓰여있다. 이 숫자를 모두 합해서 출력하는 프로그램을 작성하시오.
+N = int(input())
+number = list(input())
+result = 0
+for i in range(N):
+    result += int(number[i])
+print(result)
+    
 
 # 문제 번호 10809 알파벳 찾기
 #
