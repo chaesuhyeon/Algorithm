@@ -169,9 +169,13 @@ print(len(alpha)-count) # 입력받은 alpha의 전체 길이에서 count를 빼
 
 
 # 문제 번호 1316 그룹 단어 체커
-#
+N = int(input()) # 반복횟수, 단어의 개수 
 
-
-
-
-
+for i in range(N):
+    word = input()
+    for j in range(len(word)-1):  # 마지막 단어(j+1)까지 비교하기 위해 범위 len(word)-1
+        if word[j] != word[j+1]:  # j와 j+1이 다른 경우만 비교 
+             if word[j] in word[j+1:]:
+                 N -= 1
+                 break      
+print(N)
