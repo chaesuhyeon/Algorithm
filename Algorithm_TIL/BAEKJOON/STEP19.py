@@ -76,7 +76,18 @@ for n in range(N):
         else:
             print(queue[-1]) 
             
-                       
+            
+# 문제 번호 2164 카드 2
+import sys
+from collections import deque
+N = int(sys.stdin.readline())
+queue = deque([i for i in range(1, N + 1)])
+
+while len(queue) > 1: # 길이가 1이상인 경우만 반복
+    queue.popleft()  # 맨 처음 원소 빼줌
+    queue.append(queue[0]) # 첫번째 원소를 뒤에 삽입
+    queue.popleft() # 첫번째 원소 삭제 
+print(queue[0]) # 길이가 1개일때 그 1개의 원소를 출력                       
             
             
             
