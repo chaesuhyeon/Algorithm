@@ -281,3 +281,36 @@ for _ in range(N):
     if len(stk) != 0: # 반복문을 다 돌았을때 stk가 빈문자열이 아니라면 삭제되지않은 문자가 있다는 뜻 (쌍이 맞지않은 문자 존재)
         cnt += 1 # +1 카운트 해줌 
 print(N - cnt) # 최종적으로 전체 단어 개수(N)에서 좋은 단어가 아닌 것 개수(cnt)를 빼줌
+
+# 문제 번호 5397 키로거
+# 1406 에디터 문제와 같은 방법으로 풀었음  근데 시간 1560ms..
+import sys
+n = int(sys.stdin.readline().rstrip())
+for _ in range(n):
+    stk1 = []
+    stk2=[]
+    pwd = list(sys.stdin.readline().rstrip())
+    for i in pwd: # 입력받은 문자열이 
+        if i.isalpha(): # 알파벳이면 stk1에 append
+            stk1.append(i) 
+        elif i.isdigit(): # 문자인 숫자면 
+            stk1.append(i) # stk1에 append
+        elif i == "<": # 왼쪽으로 커서 이동하는 경우 
+            if len(stk1) > 0: #  # 왼쪽 스택이 빈 리스트가 아니라면 
+                stk2.append(stk1.pop()) # 마지막 문자를  pop 해줘서 두번째 스택으로 이동
+            else: # 빈 리스트트면
+                continue # 무시하고 위로 올라가 반복 수행 
+        elif i == ">": # 오른쪽으로 커서 이동하는 경우 
+            if len(stk2) > 0: #스택이 빈 리스트가 아니라면
+                stk1.append(stk2.pop()) # # 마지막 문자를  pop 해줘서 두번째 스택으로 이동
+            else: # 빈 리스트트면
+                continue # 무시하고 위로 올라가 반복 수행 
+        elif i == "-": # 백스페이스일 경우 &  stk1이 빈 리스트가 아닌 경우  앞 문자 삭제 
+            if len(stk1) > 0:
+                stk1.pop()  # 왜 stk1에서 마지막 문자를 빼주냐면 백스페이스는 무조건 문자뒤에 올거라고 가정.. 문자 추가는 첫번째 스택 stk1에서 진행되기 때문에 첫번째 스택에서 pop해줌 
+            else:
+                continue
+    print(''.join(stk1 + list(reversed(stk2))))
+    
+
+# 10799 쇠막대기 
