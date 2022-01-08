@@ -374,7 +374,28 @@ for _ in range(N):
     print() # case 한개의 출력이 끝나면 줄바꿈 
 
 # 문제 번호 12789 도키도키 간식드리미
-
+from collections import deque
+n = int(input())
+num = deque(map(int, input().split()))
+stk = deque([])
+cnt = 1
+while num :
+    if num[0] == cnt: # 첫번째 숫자가 cnt와 같으면 pop해줌
+        num.popleft()
+        cnt += 1
+    else:
+        stk.append(num.popleft()) # cnt와 같지 않으면 빼주고 스택에 append
+    
+    while stk: # 스택이 존재한다면
+        if stk[-1] == cnt: # 스택의 마지막 데이터와 cnt가 같으면 stk에서 제거 
+            stk.pop()
+            cnt+=1
+        else: # 다 제거되면 반복문 종료 
+            break
+if len(stk) == 0:
+    print('Nice')
+else:
+    print('Sad')
 
 
 # 문제 번호 14713 앵무새
