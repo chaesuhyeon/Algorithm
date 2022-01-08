@@ -313,7 +313,28 @@ for _ in range(n):
     print(''.join(stk1 + list(reversed(stk2))))
     
 
-# 10799 쇠막대기 
+# 문제 번호 10799 쇠막대기 
+# 문제 풀이방법을 전혀 생각 못해서 아이디어 참고..
+# (가 나오면 stack에 push
+# )가 나올 경우 그 전 문자열이 (일 경우 stack에서 pop해주고 스택 크기만큼 result에 더함
+# 그 전 문자열이 )일 경우 stack에서 pop하고 result에 1을 증가 시킴
+
+import sys
+ps = sys.stdin.readline().rstrip()
+stk = []
+result = 0
+
+for i in range(len(ps)):
+    if ps[i] == "(":
+        stk.append("(")
+    else: # ")"경우
+        if ps[i-1] == "(":
+            stk.pop()
+            result += len(stk)
+        else:
+            stk.pop()
+            result += 1
+print(result)
     
 
 # 문제 번호 11899 괄호 끼워넣기
@@ -332,3 +353,59 @@ for i in S: # 문자열 하나하나 반복문 돌려봄
         else: # stk1가 빈 리스트가 아니면 여는 괄호가 없다는 뜻이기 때문에 여는괄호 필요함 -> 개수 측정해 주기위해 stk2에 append
             stk2.append(")")
 print(len(stk2)+len(stk1)) # 없애지 못한 각 괄호들의 개수를 구해줌 (짝이 필요한 괄호들의 개수)    
+
+
+# 문제 번호 12605 단어순서 뒤집기
+import sys
+N = int(sys.stdin.readline())
+stk = []
+cnt = 0
+
+for _ in range(N):
+    stk = [] # word를 append 하기전 stk 초기화 
+    word = sys.stdin.readline().split() # 공백으로 split
+    for _ in range(len(word)): # 입력한 문자의 길이 만큼 반복 
+        stk.append(word.pop()) # word에서 하나씩 pop해서 stk에 append
+
+    cnt += 1 # case 번호 1번부터 출력하기 위해서 
+    print(f'Case #{cnt}: ' , end='') # end 써서 이어서 출력 
+    for j in range(len(stk)): # stk에 담겨진 문자열 하나하나 뽑아서 end 써서 이어서 출력 
+        print(stk[j], end=' ')
+    print() # case 한개의 출력이 끝나면 줄바꿈 
+
+# 문제 번호 12789 도키도키 간식드리미
+
+
+
+# 문제 번호 14713 앵무새
+
+# 문제 번호 15815 천재수학자 성필 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
