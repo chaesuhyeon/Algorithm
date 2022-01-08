@@ -401,7 +401,41 @@ else:
 # 문제 번호 14713 앵무새
 
 # 문제 번호 15815 천재수학자 성필 
+# 후위표기식2와 같은 방법으로 풀이함 
+import sys
+num = sys.stdin.readline().rstrip()
+stk = []
+for i in num:
+    if i.isdigit():
+        stk.append(int(i))
+    else:
+        if i == "*":
+            n1 = stk.pop()
+            n2 = stk.pop()
+            stk.append(n2 * n1)
+        elif i == "/":
+            n1 = stk.pop()
+            n2 = stk.pop()
+            stk.append(n2 // n1)  # 문제에서 모든 계산 결과가 정수라고 명시되어 있기 때문에 /가 아닌 //로 써줌 
+        elif i == "+":
+            n1 = stk.pop()
+            n2 = stk.pop()
+            stk.append(n2 + n1)
+        else:
+            n1 = stk.pop()
+            n2 = stk.pop()            
+            stk.append(n2 - n1)
+print(stk[0])
+    
 
+# 문제 번호 17413 단어 뒤집기 2
+
+# 문제 번호 17608 막대기
+
+# 문제 번호 17952 과제는 끝나지 않아!
+    
+
+# 문제 번호 23253 자료구조는 정말 최고야 
 
 
 
