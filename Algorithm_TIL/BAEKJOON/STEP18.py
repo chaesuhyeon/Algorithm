@@ -138,5 +138,60 @@ while True: # 반복 횟수가 정해지지 않아서 while문 사용
     elif len(stk) > 0: # 0 이상이라면 , 모두 pop되지 않아 균형잡힌 문장이 아님을 판단
         print("no")
     i+=1 # i를 증가시켜 반복 계속 진행
+
+# 문제 번호 1874 스택 수열
+
+import sys
+
+n = int(sys.stdin.readline())
+arr = []
+sign=[]
+cnt = 1
+for i in range(n):
+    num = int(sys.stdin.readline())
+    while cnt <= num: # 숫자는 1부터니까  입력 들어온 숫자까지 반복문 돌려가며 리스트에 append해줌 
+        arr.append(cnt)
+        sign.append("+")
+        cnt += 1
+    if arr[-1] == num:
+        arr.pop()
+        sign.append("-")
+    else:
+        sign.append("NO")
         
-        
+if "NO" not in sign: # sign리스트에 NO가 없으면 그대로 부호만 출력
+    for s in sign:
+        print(s)
+else:
+    print("NO") # NO가 있다면 NO출력
+    
+# 문제 번호 1406 에디터
+import sys
+stk1 = list(sys.stdin.readline().rstrip())
+stk2 = []
+M = int(sys.stdin.readline())
+for i in range(M):
+    menu = sys.stdin.readline().split()
+    if menu[0] == "L":
+        if stk1 :
+            stk2.append(stk1.pop())
+        else :
+            continue
+
+    elif menu[0] == "D":
+        if stk2 :
+            stk1.append(stk2.pop())
+        else:
+            continue
+    elif menu[0] == "B":
+        if stk1:
+            stk1.pop()
+        else :
+            continue
+    elif menu[0] == "P":
+        stk1.append(menu[1])
+
+print(''.join(stk1 + list(reversed(stk2))))
+
+    
+    
