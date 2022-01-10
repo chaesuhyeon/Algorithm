@@ -399,6 +399,37 @@ else:
 
 
 # 문제 번호 14713 앵무새
+import sys
+bird = int(sys.stdin.readline().rstrip())
+stk = []
+
+status = True # 상태 체크를 위한 변수 
+for _ in range(bird): # 앵무새 수만큼 반복하여 앵무새가 말하는거 리스트에 저장 
+    stk.append(sys.stdin.readline().rstrip().split()) # 앵무새가 말한 단어? 문장?  [['i', 'want', 'to', 'see', 'you'], ['next', 'week'], ['good', 'luck']]
+
+word = sys.stdin.readline().split() # cseteram이 받아 적은 문장
+
+
+while word: # word가 존재하는 동안 
+    w = word.pop() # (i want next good luck week to see you) 에서 끝에 것부터 pop
+    
+    for j in range(bird): # 리스트 길이 만큼 반복 해줌 (0 ~ 2만큼)
+        if stk[j]: # stk[j]의 데이터가 존재하면 (처음에 이부분 안써줘서 런타임 오류(index error) 났음 )
+            if w == stk[j][-1]: # pop한 값과 2차원 배열 안의 끝에 값이 같으면
+                stk[j].pop() # 그 값을 pop
+                status = True # pop에 성공했으니 상태 True
+                break # 바로 위 반복문 종료 
+
+            else: # pop한 값이 2차원 배열 안의 끝값과 같지 않다면
+                status = False # 실패했으니 상태 False
+           
+
+    if status == False : # 반복이 끝났는데도 상태가 False이면 제거가 안됐다는 뜻 
+        print("Impossible") 
+        break # 바로 반복문 종료 (뒤에 더 계산할 필요x)
+
+if status == True : # 모든 반복문이 끝나고 상태가 True 라면 
+    print("Possible") # 성공 
 
 # 문제 번호 15815 천재수학자 성필 
 # 후위표기식2와 같은 방법으로 풀이함 
@@ -409,28 +440,85 @@ for i in num:
     if i.isdigit():
         stk.append(int(i))
     else:
+        n1 = stk.pop()
+        n2 = stk.pop()        
         if i == "*":
-            n1 = stk.pop()
-            n2 = stk.pop()
             stk.append(n2 * n1)
+
         elif i == "/":
-            n1 = stk.pop()
-            n2 = stk.pop()
             stk.append(n2 // n1)  # 문제에서 모든 계산 결과가 정수라고 명시되어 있기 때문에 /가 아닌 //로 써줌 
+
         elif i == "+":
-            n1 = stk.pop()
-            n2 = stk.pop()
             stk.append(n2 + n1)
-        else:
-            n1 = stk.pop()
-            n2 = stk.pop()            
+
+        else:           
             stk.append(n2 - n1)
-print(stk[0])
-    
+            
+print(stk[0])    
 
 # 문제 번호 17413 단어 뒤집기 2
+import sys
+from collections import deque
+
+stk = [] ## 괄호 밖 문자 저장 
+q=deque() ## 괄호 안의 문자
+result = '' ## 총 결과값
+state = True ## true = 뒤집어서 출력 / false : 안뒤집음
+
+S = sys.stdin.readline().rstrip()
+
+for i in S:
+    if i == "<": # "<" 괄호가 나올때
+        while stk: # 만약 괄호 밖의 문자가 존재한다면
+            result += stk.pop() # 현재 있는 결과에 거꾸로 출력 
+        q.append(i) # "<" 괄호 큐에 append
+        state = False # 괄호 안이라는 상태표시. 뒤집을 필요 없는 상태
+    
+    elif i == ">": # ">" 괄호가 나오면
+        q.append(i) # 큐에 닫는 괄호 append
+        state = True # 괄호가 끝났기 때문에 다시 뒤집을 필요가 있다는 상태표시를 해줌
+        while q : # 괄호부터 괄호 안에있는 문자를 결과값에 저장
+            result += q.popleft() # popleft()를 이용하여 왼쪽부터 pop
+    
+    elif i==' ': # i가 공백문자라면
+        if state: # 괄호 밖일 때 (state = True)
+            while stk: # 스택이 존재할때까지  
+                result += stk.pop() # 이제까지 스택에 저장된 문자들을 pop해줘서 거꾸로 만들어주고 결과값에 저장
+            result += ' '  # 문자를 뒤집어서 출력해준 뒤 결과값에 공백 추가 
+        else: # 괄호 안이라면
+            q.append(i) # 그냥 공백문자 추가해줌
+            while q: # 큐가 존재한다면 존재하는 동안 result에 문자 저장 
+                result += q.popleft() #
+    else: # i가 괄호, 공백이 아닌 문자일때
+        if state: # 만약 괄호 밖이라면 (state = True)
+            stk.append(i) # 스택에 추가해줌 
+        else: # 괄호 안이라면
+            q.append(i) # 큐에 추가해줌
+while stk: # 혹시 스택에 남아있는 문자가 있다면 (마지막이 문자라면 추가만 될 뿐 pop해서 빼주는 과정이 빠졌기 때문에 pop해준다)
+    result += stk.pop() # 모두 결과값에 저장
+ 
+print(result) # 최종 결과 출력 
+
+    
+    
+
 
 # 문제 번호 17608 막대기
+import sys
+
+N = int(sys.stdin.readline().rstrip()) # 막대기의 수 
+stk =[]
+num = []
+for _ in range(N): # 막대기의 수 만큼 반복
+    num.append(int(sys.stdin.readline().rstrip())) # 입력 받은 막대기의 높이를 리스트에 추가 
+
+stk.append(num[-1]) # stk에 젤 오른쪽 막대기 높이 삽입
+
+for i in range(len(num)): # 막대기 개수만큼 반복함
+    p = num.pop() # 오른쪽 막대기부터 봐야하므로 pop해서 막대기 높이 비교함
+    if p > stk[-1]: # pop한 막대기가 stk에 추가된 막대기보다 높은 높이라면 
+        stk.append(p) # stk에 추가해줌 
+print(len(stk)) # 스택의 길이 (막대기의 개수)
 
 # 문제 번호 17952 과제는 끝나지 않아!
     
