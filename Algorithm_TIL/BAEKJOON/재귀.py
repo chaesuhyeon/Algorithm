@@ -57,3 +57,37 @@ N = int(input())
 cnt = 0
 print("어느 한 컴퓨터공학과 학생이 유명한 교수님을 찾아가 물었다.")
 recur(N, cnt)
+
+# 5568 카드 놓기
+def card(depth):
+    print("depth : " , depth)
+    if depth == k:
+        s.add(''.join(map(str, li)))
+        print("s : ", s)
+        return 
+    for i in range(n):
+        print(f'depth:{depth} & i:{i}')
+        if check[i]:
+            continue
+        print("nums : ", nums)
+        li.append(nums[i])
+        print("li.append(nums[i]) : ", li)
+        check[i] = 1
+        card(depth+1)
+        li.pop()
+        print(f'depth:{depth} & li.pop():{li}')
+        check[i] = 0
+        
+n, k = int(input()), int(input())
+nums = [int(input()) for _ in range(n)]
+li, s = [], set()
+check = [0]*n
+card(0)
+print(len(s))
+
+
+
+
+
+
+
