@@ -85,7 +85,14 @@ check = [0]*n
 card(0)
 print(len(s))
 
+# 10870 피보나치수 5
+def fibonacci(n):
+    if n <= 1:
+        return n
+    return fibonacci(n-1) + fibonacci(n-2)
 
+n = int(input())
+print(fibonacci(n))
 
 
 
