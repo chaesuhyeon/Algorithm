@@ -94,7 +94,17 @@ def fibonacci(n):
 n = int(input())
 print(fibonacci(n))
 
+# 117229 하노이 탑 
+def hanoi(num, start, end, sub ) :
+    if num == 1:
+        print(start, end)
+        return
+    hanoi(num-1, start, sub, end)
+    print(start, end)
+    hanoi(num-1, sub, end, start)
 
-
+num = int(input())
+print(2**num -1)
+hanoi(num, 1, 3, 2)
 
 
