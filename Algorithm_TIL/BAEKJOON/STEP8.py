@@ -18,7 +18,7 @@ while n > nums_pileup :
     cnt += 1  # 반복문을 반복하는 횟수
 print(cnt)
 
-# 10757 큰 수 A + B
+# 10757 큰 수 A + B 
 A,B = map(int, input().split())
 print(A+B)
 
