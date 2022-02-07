@@ -101,10 +101,40 @@ else:
     
 print(num[-1] - num[0])  # 범위  // 이미 정렬이 되어 있으므로 인덱스로 빼줌 
     
+
 # 1427 소트인사이드
 import sys
 N = list(map(int, sys.stdin.readline())) # 2413 --> [2, 4, 1, 3]
 N.sort(reverse=True)
 for i in range(len(N)):
     print(N[i], end='')
+
+
+# 11650 좌표 정렬하기
+import sys
+N = int(sys.stdin.readline())
+num=[]
+for _ in range(N):
+    x, y = map(int,sys.stdin.readline().split())
+    num.append([x, y])
+
+num.sort() # [[1, -1], [1, 1], [2, 2], [3, 3], [3, 4]]
+
+for i in range(N):
+    print(num[i][0], num[i][1])
+
+
+# 11651 좌표 정렬하기2
+import sys
+N = int(sys.stdin.readline())
+num=[]
+for _ in range(N):
+    x, y = map(int,sys.stdin.readline().split())
+    num.append([y, x]) # y를 기준으로 정렬해야 하므로 순서 바꿔서 append 
+
+num.sort() 
+
+for i in range(N):
+    print(num[i][1], num[i][0]) # x y 순서대로 출력을 해야하므로 [1] , [0] 으로 출력 
+
 
