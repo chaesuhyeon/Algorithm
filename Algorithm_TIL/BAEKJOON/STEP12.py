@@ -138,3 +138,21 @@ for i in range(N):
     print(num[i][1], num[i][0]) # x y 순서대로 출력을 해야하므로 [1] , [0] 으로 출력 
 
 
+# 18870 좌표압축
+import sys
+N = int(sys.stdin.readline())
+num = list(map(int, sys.stdin.readline().split()))
+
+s_num = sorted(list(set(num))) # 두번째 예제 참고해서 중복값을 제거하기 위해 set함수를 사용하고 list로 바꿔준뒤 정렬
+
+dic = dict() # 딕셔너리 생성
+
+for i in range(len(s_num)): # 중복 제거한 원소 개수만큼 반복하여 딕셔너리에 key = value 값 저장 
+    dic[s_num[i]] = i # key에 정렬된 리스트인 s_num의 원소를 넣고, 순서대로 정렬된 상태기 때문에 i값을 넣어줌   
+    # 생각해보니 s_num은 정렬된 상태라 index함수를 사용할게 아니라 그냥 i로 넣어주면 됐었음..
+
+#print(dic)  # {-10: 0, -9: 1, 2: 2, 4: 3}
+
+
+for i in num:
+    print(dic[i] , end= ' ') # num의 value 값을 출력 
