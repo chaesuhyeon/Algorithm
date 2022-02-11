@@ -151,9 +151,160 @@ if __name__ == '__main__':
 
     partition(x)
 
+# 퀵 정렬 알고리즘 구현( 원소 수가 9미만이면 단순 삽입 정렬)
+from typing import MutableSequence
+def sort3(a : MutableSequence , idx1 : int, idx2 : int, idx3 : int):
+    """a[idx1], a[idx2] , a[idx3] 을 오름차순으로 정렬하고 중앙값의 인덱스를 반환"""
+    if a[idx2] < a[idx1] : a[idx2], a[idx1] = a[idx1], a[idx2]
+    if a[idx3] < a[idx2] : a[idx3], a[idx2] = a[idx2], a[idx3]
+    if a[idx2] < a[idx1] : a[idx2], a[idx1] = a[idx1], a[idx2]
+    return idx2
+
+def insertion_sort(a : MutableSequence , left: int, right: int) -> None:
+    """a[left] ~ a[rigth]를 단순 삽입정렬"""
+    for i in range(left +1 , right + 1):
+        j = i
+        tmp = a[i]
+        while j > 0 and a[j-1] > tmp:
+            a[j] = a[j-1]
+            j -= 1
+        a[j] = tmp
+
+def qsort(a : MutableSequence , left: int, right: int) -> None:
+    """a[left] ~ a[rigth]를 퀵 정렬"""
+    if right - left < 9:
+        insertion_sort(a, left, right) # 원소수가 9이하이면 단순 삽입정렬
+    else:
+        pl = left # 왼쪽 커서
+        pr = right # 오른쪽 커서
+        m = sort3(a , pl, (pl+pr)//2 , pr) # 오름차순으로 정렬하고 중앙값의 인덱스를 반환
+        x = a[m] # 피벗 값
+
+        a[m],a[pr-1] = a[pr-1], a[m] # 중앙값(피벗)값과 끝에서 두번째 원소를 교환
+        pl += 1 # a[left]의 값은 (첫번째 값은) 피벗값 이하인 값이고 
+        pr -= 2  # a[right -1]과 a[right]은 피벗이상인 값이기 때문에 더이상 스캔할 필요x  [그림 6-26 참고]
+        while pl <= pr:
+            while a[pl] < x : pl+=1
+            while a[pr] > x : pr -= 1
+            if pl <= pr :
+                a[pl], a[pr] = a[pr], a[pl]
+                pl += 1
+                pr -= 1
+        if left < pr :qsort(a, left, pr)
+        if pl < right : qsort(a, pl, right) 
+
+def quick_sort(a : MutableSequence) -> None:
+    """ 퀵 정렬 """
+    qsort(a, 0, len(a)-1)
+
+if __name__ == "__main__":
+    print('퀵 정렬을 합니다(원소 수가 9미만이면 단순 삽입 정렬을 합니다.')
+    num = int(input('원소 수를 입력하세요 : '))
+    x = [None] * num
+
+    for i in range(num):
+        x[i] = int(input(f'x[{i}] : '))
+
+    quik_sort(x)
+
+    print('오름 차순으로 정렬했습니다.')
+    for i in range(num):
+        print(f'x[{i}] = {x[i]}')
 
 
+# 힙 정렬( = 부분 순서트리)
+# 선택 정렬(최솟값 , 최댓값을 선택해 정렬하는 알고리즘)을 응용한 알고리즘
+# 힙의 특성을 이용하여 정렬하는 알고리즘
+# 시간 복잡도 O(n log n)
+# 힙에서 최댓값은 root에 위치한다.
+# 힙 : 부모의 값이 자식의 값보다 항상크다 라는 조건을 만족하는 완전 이진 트리 (부모의 값이 자식의 값보다 항상 작아도 힙 이라고 함)
+# 대소관계만 일정하면 힙이라고 할 수 있음
+# 형제 노드간의 대소관계는 일정하지 않음
+# 트리 : 각 원소를 의미하는 노드들이 연결된 계층구조
+# 완전 : 부모는 왼쪽자식부터 추가하여 모양을 유지
+# 이진 : 부모가 가질 수 있는 자식의 최대 개수는 2개
 
+# 원소a[i]에서 다음 관계가 성립 
+# 부모 : a[(i-1) // 2]
+# 왼쪽 자식 : a[i*2 +1]
+# 오른쪽 자식 : a[i*2 + 2]
+
+# 힙에서 최댓값인 루트를 꺼내고 루트 이외의 부분을 힙으로 만드는 과정을 반복
+# 1. 루트를 꺼냄
+# 2. 마지막 원소(가장 하단의 오른쪽 원소)를 루트로 이동
+# 3. 루트에서 시작하여 자신보다 값이 큰 자식과 자리를 바꾸고 아래로 내려가는 작업을 반복함. 자식의 값이 작거나 리프(자식이 없는 노드. 단말노드)의 위치에 도달하면 종료
+
+# 이 순서를 적용하기 전에 배열을 반드시 힙으로 만들어야 함
+# 1. i값을 n-1로 초기화 / i : 배열의 마지막 인덱스 , n : 배열의 원소 수
+# 2. a[0]과 a[i]값을 교환
+# 3. a[0], a[1], ,,, a[i-1]을 힙으로 만듦
+# 4. i값을 1씩 감소시켜 0이되면 종료, 그렇지 않으면 2로 돌아감
+
+from typing import MutableSequence
+
+def heap_sort(a : MutableSequence) -> None:
+    """힙 정렬"""
+
+    def down_heap(a : MutableSequence , left : int, right : int) -> None:
+        """a[left] ~ a[right]를 힙으로 만들기"""
+        temp = a[left] # 루트
+
+        parent = left
+        while parent < (right+1) // 2:
+            cl = parent * 2 + 1 # 왼쪽 자식
+            cr = cl + 1 # 오른쪽 자식
+            child = cr if cr <= right and a[cr] > a[cl] else cl # 큰 값을 선택
+            if temp  >= a[child]:
+                break
+            a[parent] = a[child]
+            parent = child
+        a[parent] = temp
+    
+    n = len(a)
+
+    for i in range((n-1)//2 , -1, -1): # a[i] ~ a[n-1]을 힙으로 만들기
+        down_heap(a, i, n-1)
+    
+    for i in range(n-1, 0, -1):
+        a[0] , a[i] = a[i], a[0] # 최댓값인 a[0]과 마지막 원소를 교환
+        down_heap(a, 0, i-1) # a[0] ~a[i-1]을 힙으로 만들기
+
+    
+if __name__ == '__main__':
+    print('힙 정렬을 수행합니다.')
+    num = int(input('원소 수를 입력하세요 : '))
+    x = [None] * num
+
+    for i in range(num):
+        x[i] = int(input(f'x[{i}] : '))
+    
+    heap_sort(x)
+
+    print('오름차순으로 정렬했습니다.')
+    for i in range(num):
+        print(f'x[{i}] = {x[i]}')
+
+# heap_sort()함수는 원소수가 n인 배열a를 정렬하는 함수
+# 1단계 : down_heap()함수를 호출하여 배열 a를 힙으로 만듦
+# 2단계 : 최댓값인 루트 a[0]을 꺼내서 배열의 마지막 원소와 교환하고 배열의 남은 부분을 다시 힙으로 만드는 과정을 반복하여 정렬을 수행
+
+# 파이썬의 heapq모듈
+# 힙에 원소를 추가하는 heappush()
+# 힙에서 원소를 제거하는 heappoop() 함수
+# 이때 푸시와 팝은 힙의 조건을 유지하며 수행
+
+import heapq
+from typing import MutableSequence
+
+def heap_sort(a : MutableSequence) -> None:
+    """힙 정렬(heapq.push와 heapq.pop을 사용)"""
+    heap = []
+    for i in a:
+        heapq.heappush(heap, i)
+    for i in range(len(a)):
+        a[i] = heapq.heappop(heap)
+
+    # ... 생략
 
 
 
