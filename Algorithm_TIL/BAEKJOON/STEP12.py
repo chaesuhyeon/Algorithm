@@ -175,3 +175,54 @@ while i < len(A):
     sum += A[i] * p # 그 최댓값과 A의 최솟값을 곱함
     i += 1 # 인덱스 늘려가며 A의 최솟값과 B의 최댓값을 곱해줌
 print(sum) # 합계 출력 
+
+
+# 2217 로프
+# max_weight에서 값 * 로프의 개수(N)
+import sys
+N = int(sys.stdin.readline().rstrip())
+rope = [0] * N 
+for i in range(N):
+    rope[i] = int(sys.stdin.readline().rstrip())
+
+rope.sort(reverse=True) # 큰 값부터 계산하기 위해 
+
+mw = 0 # max_weight
+for i in range(N):
+    w = rope[i] * (i+1) # rope는 한개부터 (모든 로프를 다 이용할 필요는 없으므로)
+    if w > mw : # w 가 mw보다 크면 최댓값이므로 
+        mw = w # w값을 mw에 대입
+print(mw) # 최댓값 출력
+
+
+# 11399 ATM
+import sys
+N = int(sys.stdin.readline().rstrip())
+arr = list(map(int, sys.stdin.readline().split())) # 시간 입력받음
+arr.sort() # 정렬
+
+time = [0] * N
+t_sum = 0
+for i in range(N):
+    t_sum += arr[i] # 시간의 합계를 구해줘서
+    time[i] = t_sum # time리스트에 각 사람이 걸리는 시간의 합을 넣어줌
+print(sum(time)) # 리스트 전체 합 구해줌 (모든 사람의 시간의 합)
+
+
+# 1764 듣보잡
+import sys
+N , M = map(int, sys.stdin.readline().split())
+n_set = set() 
+for _ in range(N):
+    n_set.add(sys.stdin.readline().rstrip())
+
+m_set = set()
+for _ in range(M):
+    m_set.add(sys.stdin.readline().rstrip())
+
+result = sorted(list(n_set & m_set)) # 교집합 인것들을 list로 변환 후 정렬
+
+
+print(len(result)) # 길이 출력 (듣과 보의 겹치는 것의 개수)
+for i in result:
+    print(i) # 겹치는 원소 출력 
