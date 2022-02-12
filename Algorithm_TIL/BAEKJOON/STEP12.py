@@ -226,3 +226,52 @@ result = sorted(list(n_set & m_set)) # 교집합 인것들을 list로 변환 후
 print(len(result)) # 길이 출력 (듣과 보의 겹치는 것의 개수)
 for i in result:
     print(i) # 겹치는 원소 출력 
+
+# 10825 국영수
+import sys
+N = int(sys.stdin.readline().rstrip())
+arr = [0] * N
+for i in range(N):
+    name, kor, eng, math = map(str,sys.stdin.readline().split())
+    kor, eng, math = int(kor) , int(eng), int(math) # 점수들은 숫자로 변환
+    arr[i] = [name , kor, eng, math] # 이중배열로 추가 
+
+arr.sort(key=lambda z: (-z[1], z[2], -z[3], z[0])) # 문제에 나온 조건대로 정렬
+for i in arr:
+    print(i[0]) # 이름만 출력
+
+
+# 3273 두 수의 합
+import sys
+n = int(sys.stdin.readline().rstrip())
+arr = sorted(list(map(int, sys.stdin.readline().split())))
+x = int(sys.stdin.readline().rstrip()) 
+cnt = 0
+left, right = 0, n-1
+
+while left < right: # 왼쪽 인덱스가 오른쪽 인덱스보다 작을 경우에만 반복수행
+    num = arr[left] + arr[right]
+    if num == x: # x(비교값)면 cnt + 1 해주고,  작은 숫자부터 증가시켜 비교 
+        cnt += 1
+        left +=1
+    elif num < x: # 비교값 x보다 더한값 num이 작다면 작은 숫자부터 증가시킴
+        left += 1
+    else: # 비교값 x보다 더한값num이 크다면 큰숫자 인덱스를 하나씩 감소시켜  비교
+        right -= 1
+print(cnt)
+
+
+# 11656 접미사 배열
+import sys
+word = list(sys.stdin.readline().rstrip()) # word  :  ['b', 'a', 'e', 'k', 'j', 'o', 'o', 'n']
+arr = []
+tmp = "" 
+for _ in range(len(word)): # 단어의 길이만큼 반복
+    p = word.pop() # 맨 끝 원소 뽑음
+    tmp = p + tmp # 뽑은 맨끝원소를 기존 접미사와 계속 더해줌 (순서 p먼저 주의)
+    arr.append(tmp) # 합친 단어를 리스트에 append
+
+arr.sort() # 정렬 
+
+for i in arr: # 리스트 원소 뽑아줌
+    print(i)
