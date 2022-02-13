@@ -275,3 +275,39 @@ arr.sort() # 정렬
 
 for i in arr: # 리스트 원소 뽑아줌
     print(i)
+
+
+# 2776 암기왕
+import sys
+input = sys.stdin.readline
+
+
+t = int(input().rstrip())
+
+for _ in range(t):
+    n1 = int(input().rstrip())
+    s1 = set(list(map(int,input().rstrip().split())))
+    n2 = int(input().rstrip())
+    s2 = list(map(int,input().rstrip().split()))
+    for i in s2:
+        if i in s1:
+            print(1)
+        else:
+            print(0)
+
+
+# 1449 수리공 항공
+n , l = map(int, input().split())
+loc = list(map(int, input().split()))
+loc.sort()
+
+start = loc[0] # 맨 처음 값을 시작점으로
+cnt = 1 # 필요한 테이프 개수 일단 1개부터 시작
+for i in loc[1:]:
+    if i in range(start, start+l):
+        continue # 시작점 + 테이프 길이 했을 때 i의 값이 이 범위안에 들어오면 기존 테이프를 사용한다는 코드
+    else: # 범위를 넘어가면 새테이프를 사용해야한다는 코드
+        start = i
+        cnt += 1
+
+print(cnt)
