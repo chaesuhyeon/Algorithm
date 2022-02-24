@@ -151,3 +151,19 @@ for i in range(n):
         if arr[i][0] < arr[j][0] and arr[i][1] < arr[j][1]: # 다음값과 비교해서 다음값이 두개 다 큰 경우 +1해줌
             grade = grade + 1
     print(grade,end=" ")  # 이어서 출력
+
+
+# 1436 영화감독 숌
+n = int(input())
+count = 0
+num = 666
+while True:
+    if '666' in str(num): # num에 1값을 더해줘야하기때문에 기본형은 int이고 str로 바꿔서 '666'이 포함되어 있는지 확인한다.
+        count += 1
+    if count == n:
+        print(num)
+        break
+    num += 1
+
+# num을 1씩 증가시켜서 666이 문자열안에 포함되어 있다면 count를 +1 해주고
+# count값과 n이 동일하다면 그때의 종말 숫자를 출력 해준다.
