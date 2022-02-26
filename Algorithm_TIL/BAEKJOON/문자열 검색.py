@@ -185,3 +185,14 @@ for i in combinations(card, 3): # 카드 리스트에 있는 요소중 3개 뽑�
         m_sum = card_sum # max_sum에 card_sum 대입
 
 print(m_sum)
+
+# 2231 분해합
+n = int(input())
+for i in range(1, n+1): # 부르트 포스법 --> 앞에서부터 탐색함 완전탐색
+    num = sum(map(int, str(i))) # i를 각 자리숫자를 문자열로 바꿔준 뒤 다시 int로 변환 후 합 계산
+    n_sum = i + num # 숫자 + 각 자리수 합
+    if n_sum == n:
+        print(i)
+        break
+    if i == n: # i와 n이 같다는건 이미 실패함. 생성자 존재x (각 자리수를 더한 값도 포함이 되는데 이미 n과 같다는건 i에  각 자리수를 더했을때 값이 더 커짐 --> i는 생성자가 될 수 없음)
+        print(0)
