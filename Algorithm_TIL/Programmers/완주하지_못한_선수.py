@@ -34,3 +34,12 @@ def solution(participant, completion):
             answer = i # 조건문을 만족하면 완주를 못한 사람이라는 뜻이므로 i를 answer에 대입 
         
     return answer # answer return 
+
+# 다른 풀이 2- 성공
+def solution(participant, completion):
+    participant.sort() # 두 리스트 모두 정렬 
+    completion.sort()
+    for i in range(len(completion)):
+        if participant[i] != completion[i]: # 앞부터 비교해서 만약에 다르면
+            return participant[i] # 완주자가 없다는 뜻이므로 그 참가자를 바로 return 
+    return participant[len(participant)-1] # 완주자 길이만큼 반복해줬는데도 return이 안끝나면 제일 마지막 참가자가 완주 못했다는 뜻
