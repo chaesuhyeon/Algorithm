@@ -148,3 +148,38 @@ for i in arr: # arr에서 한행씩 뽑아서 (i)
 print(cnt -1) # 1은 포함시키면 안되기 때문에 1빼줌(1부터 시작했기 때문에)   
 
 
+# 2178 미로 탐색
+import sys
+from collections import deque
+n,m = map(int, sys.stdin.readline().split())
+
+result = []
+
+for i in range(n):
+    result.append(list(map(int, sys.stdin.readline().rstrip())))
+
+dx=[-1,1,0,0]
+dy=[0,0,-1,1]
+
+def bfs(x,y):
+    queue = deque()
+    queue.append((x, y))
+    while queue:
+        x,y = queue.popleft()
+        for i in range(4):
+            nx = x + dx[i]
+            ny = y + dy[i]
+            if nx < 0 or nx >= n or ny < 0 or ny >= m:
+                continue
+
+            if result[nx][ny] == 0:
+                continue
+
+            if result[nx][ny] == 1:
+                result[nx][ny] = result[x][y]+1
+                queue.append((nx,ny))
+
+    return result[n-1][m-1]
+
+print(bfs(0,0)) 
+
