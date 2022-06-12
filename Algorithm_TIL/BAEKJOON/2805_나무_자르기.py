@@ -19,10 +19,10 @@ while start <= end :  # start가 end보다 작거나 같을 동안만 반복문 
         if i > mid : # mid보다 큰 나무는 잘려나감
             sum += i - mid 
 
-        if sum > m : # 잘린 나무 합계가 m값보다 크면 start값을 mid + 1
-            start = mid + 1
-        else : # 잘린 나무 합계가 m값보다 작으면 end값을 mid - 1
-            end = mid - 1
+    if sum >= m : # 잘린 나무 합계가 m값보다 크면 start값을 mid + 1
+        start = mid + 1
+    else : # 잘린 나무 합계가 m값보다 작으면 end값을 mid - 1
+        end = mid - 1
     
 print(end) # 값 출력 
 
