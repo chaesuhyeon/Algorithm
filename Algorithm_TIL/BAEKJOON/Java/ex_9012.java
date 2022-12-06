@@ -1,36 +1,32 @@
 import java.util.Scanner;
 import java.util.Stack;
 
+// 문제 : https://www.acmicpc.net/problem/9012 - 괄호
+// 알고리즘 : 스택
 public class ex_9012 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        Stack st = new Stack();
-        int T = sc.nextInt(); // 테스트 케이스 입력 받기
+
+        int T = Integer.parseInt(sc.nextLine());
 
         for (int i = 0; i < T; i++) {
-            String parse = sc.next(); // nextLine 안됨!!
-
-            for (int j = 0; j < parse.length(); j++) {
-                char ch = parse.charAt(j); // 문자열을 문자로 바꿔줌
-
-                if (ch == '('){
-                    st.push(ch); // '( '이면 스택에 push
-                } else { // ')'인 경우
-                    if(!st.isEmpty()){ // 스택이 빈스택이 아닐 경우에만
-                        st.pop(); // 마지막에 추가된 '(' pop
-                    } else { // ')' 인데, 스택이 비었다면
-                        st.push(ch); // ')'를 스택에 추가 (이미 짝이 안맞음)
-                        break;
-                    }
+            Stack<String> st = new Stack<>();
+            String[] sArr = sc.nextLine().split("");
+            for (int j = 0; j < sArr.length; j++) {
+                if(sArr[j].equals("(")){
+                    st.push(sArr[j]);
+                } else if(sArr[j].equals(")") && st.size()==0){ // )일경우 size가 0이 아닐 때 (가 존재하지 않으므로 push해서 잘못된 괄호임을 파악
+                    st.push(sArr[j]);
+                } else if(sArr[j].equals(")") && !st.peek().equals(")")){ // 스택에 값이 존재하는데 )가 아닌 경우에만 pop해서 (를 제거
+                    st.pop();
                 }
-
             }
-            if(st.isEmpty()){ // 스택이 비었다면 알맞게 pop아 됐으므로 올바른 괄호
+
+            if (st.size() ==0){
                 System.out.println("YES");
-            } else { // 스택이 비지 않았다면 짝이 안맞는 괄호
+            } else {
                 System.out.println("NO");
             }
-            st.clear(); // 1개의 반복문이 끝나면 스택을 꼭 초기화 시켜줘야 함!!
         }
     }
 }
