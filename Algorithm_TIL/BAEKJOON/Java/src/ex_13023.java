@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 // 문제 : https://www.acmicpc.net/problem/13023 - ABCDE
-// 알고리즘 : dfs
+// 알고리즘 : dfs , 백트래킹
 public class ex_13023 {
     static int N,M;
     static boolean[] visited ;
@@ -22,7 +22,7 @@ public class ex_13023 {
                 DFS(i,depth+1); // DFS 돌 때마다 depth 증가
             }
         }
-        visited[x] = false; // depth가 5가 아닐 경우에는 방문 취소(다시 돌아야하기 때문에)
+        visited[x] = false; // depth가 5가 아닐 경우에는 방문 취소(다시 돌아야하기 때문에) // 백트래킹
     }
 
     public static void main(String[] args) {
