@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-// 문제 : https://www.acmicpc.net/problem/1018 - 체스판 다시 칠하기
+// 문제 : https://www.acmicpc.net/problem/1018 - 체스판 다시 칠하기(실패)
 // 알고리즘 : 브루트포스
 public class ex_1018 {
     public static void main(String[] args) {
